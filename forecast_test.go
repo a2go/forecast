@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-// Welcome to the 2019 A2GO Workshop!
+// Welcome to the October 2019 A2GO Workshop!
 //
 // We will be building a CLI tool to fetch current and forecasted weather and print
 // to Standard Output (the screen).  You might notice in forecast.go that we have the
@@ -38,6 +38,8 @@ import (
 // - Use environment variables or CLI input for some hard-coded values (username, password, etc)
 // - Display more information to the user
 // - Allow searching by keyword
+// - Use the existing benchmark and find the fastest string concatenation method
+// - Write more integration tests (but keep them separate from unit tests)
 //
 // If you complete any of the stretch goals, be sure to add tests!!!
 

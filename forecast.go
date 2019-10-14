@@ -55,7 +55,7 @@ func GetForecast(key, latitude, longitude string) (Forecast, error) {
 
 // GenerateURL will construct the JIRA API call from components
 func GenerateURL(key, latitude, longitude string) string {
-	return ""
+	return fmt.Sprintf(apiURLFmt, key, latitude, longitude)
 }
 
 // BuildRequest will build a new client and request with the proper

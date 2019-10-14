@@ -60,8 +60,7 @@ func GenerateURL(key, latitude, longitude string) string {
 	return fmt.Sprintf(apiURLFmt, key, latitude, longitude)
 }
 
-// BuildRequest will build a new client and request with the proper
-// headers, including basic authentication
+// BuildRequest will build a new client and request with the proper headers
 func BuildRequest(url string) *http.Request {
 	req, _ := http.NewRequest(http.MethodGet, url, nil)
 	req.Header.Set("Accept", "application/json")

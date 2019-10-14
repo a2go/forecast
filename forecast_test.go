@@ -47,7 +47,7 @@ func TestGenerateURL(t *testing.T) {
 	assert := assertions.New(t)
 	t.Run("URL concatenated from base + apipath + ticket", func(t *testing.T) {
 		// Hint #1 -- https://gist.github.com/BrianGenisio/59e493e7f791ddba6d5f353d1d5e1051
-		// Hint #2 -- https://gist.github.com/BrianGenisio/75f89a244970a3cdfc1e36f56d2e2edd
+		// Hint #2 -- https://gist.github.com/StevenACoffman/fc29c4368ca74f4d7c4077539406fdf2
 
 		// Arrange
 		key := "not.important"
@@ -71,9 +71,8 @@ func TestBuildRequest(t *testing.T) {
 
 		// Docs -- https://golang.org/pkg/net/http
 		// Hint #1 -- https://gist.github.com/BrianGenisio/a3ee7551c2b6bf0ca89ff3cd09b3c5c5
-		// Hint #2 -- https://gist.github.com/BrianGenisio/90f4a514df4b2e75e05ca9fa9f059aee
-		// Hint #3 -- https://gist.github.com/BrianGenisio/36c39d6c0ec3fdd4d45bfd9b2ff10777
-		// Hint #4 -- https://gist.github.com/BrianGenisio/952c490f42698b952800972b716346df
+		// Hint #2 -- https://gist.github.com/StevenACoffman/cf75067f8d039a0a193c96bad91ae9f3
+		// Hint #3 -- https://gist.github.com/StevenACoffman/74fbf609ace0fbb6d6cf2d0da53a5db0
 
 		// Arrange
 		url := "https://nonsense.com"
@@ -132,7 +131,7 @@ func TestParseWeatherResponse(t *testing.T) {
 	t.Run("empty response returns empty result", func(t *testing.T) {
 		//t.Skip("Delete this when ready to go next")
 
-		// Hint #1 -- https://gist.github.com/BrianGenisio/8634fc8f14c5024f55a9cd6b18adc90c
+		// Hint #1 -- https://gist.github.com/StevenACoffman/f688e1d6b20b218443ffbdce6ec773be
 
 		// Arrange
 		input := "{}"
@@ -150,8 +149,8 @@ func TestParseWeatherResponse(t *testing.T) {
 		//t.Skip("Delete this when ready to go next")
 
 		// Docs -- https://golang.org/pkg/encoding/json
-		// Hint #2 -- https://gist.github.com/BrianGenisio/f1e0646c5be39da8dd1da77e8aca60d8
-		// Hint #3 -- https://gist.github.com/BrianGenisio/0ec105a1031a209953db8f1a94acdfa0
+		// Hint #2 -- https://gist.github.com/StevenACoffman/d93ccb05b9a3016ff242f1622edc93ad
+		// Hint #3 -- https://gist.github.com/StevenACoffman/19ac39ef5b734d5023a55f91e4bc59db
 
 		// Arrange
 		input := `{
@@ -174,7 +173,7 @@ func TestParseWeatherResponse(t *testing.T) {
 	t.Run("bad response returns an error", func(t *testing.T) {
 		t.Skip("Delete this when ready to go next")
 
-		// Hint #4 -- https://gist.github.com/BrianGenisio/6bd8dad67dc00e7d647f0e6353a0d486
+		// Hint #4 -- https://gist.github.com/StevenACoffman/d49defdf4147fbf9fdc9c8fcdc09f528
 
 		// Arrange
 		input := "interrupting cow"

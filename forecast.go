@@ -2,11 +2,9 @@
 package main
 
 import (
-	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	logger "log"
 	"net/http"
 	"os"
@@ -15,7 +13,6 @@ import (
 
 const (
 	//replace with your personal information as desired
-	apiURLFmt = "https://api.forecast.io/forecast/%s/%s,%s"
 	key       = "32772f4b37c5a08eb4488a2ce79155bd"
 	latitude  = "42.2797"  // Ann Arbor Latitude
 	longitude = "-83.7369" // Ann Arbor Longitude
@@ -57,42 +54,26 @@ func GetForecast(key, latitude, longitude string) (Forecast, error) {
 
 // GenerateURL will construct the DarkSky API url from components
 func GenerateURL(key, latitude, longitude string) string {
-	return fmt.Sprintf(apiURLFmt, key, latitude, longitude)
+	_, _, _ = key, latitude, longitude // TODO: Use these parameters
+	return ""
 }
 
 // BuildRequest will build a new client and request with the proper headers
 func BuildRequest(url string) *http.Request {
-	req, _ := http.NewRequest(http.MethodGet, url, nil)
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Content-Type", "application/json")
-	return req
+	_ = url // TODO: Use this parameters
+	return nil
 }
 
 // GetBody will take an httpResponse and extract the body as a string
 func GetBody(res *http.Response) string {
-	defer checkedResponseBodyClose(res)
-	body, _ := ioutil.ReadAll(res.Body)
-	return string(body)
-}
-
-func checkedResponseBodyClose(response *http.Response) {
-	err := response.Body.Close()
-	if err != nil {
-		logger.Println(err)
-	}
+	_ = res // TODO: Use this parameter
+	return ""
 }
 
 // ParseWeatherResponse will parse the DarkSky service response into a Forecast
 func ParseWeatherResponse(jsonData string) (Forecast, error) {
-	forecast := Forecast{}
-
-	jsonErr := json.Unmarshal([]byte(jsonData), &forecast)
-	if jsonErr != nil {
-		logger.Println(jsonErr)
-		return Forecast{}, jsonErr
-	}
-
-	return forecast, nil
+	_ = jsonData // TODO: Use this parameter
+	panic("Stub")
 }
 
 func output(fc Forecast, forecast bool, log *logger.Logger) {

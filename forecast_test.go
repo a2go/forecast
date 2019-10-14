@@ -67,7 +67,7 @@ func TestGenerateURL(t *testing.T) {
 func TestBuildRequest(t *testing.T) {
 	assert := assertions.New(t)
 	t.Run("Build Request from url", func(t *testing.T) {
-		//t.Skip("Delete this when ready to go next")
+		t.Skip("Delete this when ready to go next")
 
 		// Docs -- https://golang.org/pkg/net/http
 		// Hint #1 -- https://gist.github.com/BrianGenisio/a3ee7551c2b6bf0ca89ff3cd09b3c5c5
@@ -101,7 +101,7 @@ func TestBuildRequest(t *testing.T) {
 func TestGetBody(t *testing.T) {
 	assert := assertions.New(t)
 	t.Run("Test Get Body from Response", func(t *testing.T) {
-		//t.Skip("Delete this when ready to go next")
+		t.Skip("Delete this when ready to go next")
 
 		// Docs -- https://golang.org/pkg/io
 		// Hint #1 -- https://gist.github.com/BrianGenisio/cf696a9e29883a5089f8ddd725e20651
@@ -130,7 +130,7 @@ func TestParseWeatherResponse(t *testing.T) {
 	assert := assertions.New(t)
 
 	t.Run("empty response returns empty result", func(t *testing.T) {
-		//t.Skip("Delete this when ready to go next")
+		t.Skip("Delete this when ready to go next")
 
 		// Hint #1 -- https://gist.github.com/BrianGenisio/8634fc8f14c5024f55a9cd6b18adc90c
 
@@ -147,7 +147,7 @@ func TestParseWeatherResponse(t *testing.T) {
 	})
 
 	t.Run("good response populates result", func(t *testing.T) {
-		//t.Skip("Delete this when ready to go next")
+		t.Skip("Delete this when ready to go next")
 
 		// Docs -- https://golang.org/pkg/encoding/json
 		// Hint #2 -- https://gist.github.com/BrianGenisio/f1e0646c5be39da8dd1da77e8aca60d8
@@ -162,7 +162,7 @@ func TestParseWeatherResponse(t *testing.T) {
 				"summary": "This is a test daily summary"
 			}
 		}`
-		want := Forecast{Currently: CurrentConditions{Summary: "This is a test current summary",}, Daily: WeatherDaily{Summary: "This is a test daily summary"},}
+		want := Forecast{Currently: CurrentConditions{Summary: "This is a test current summary"}, Daily: WeatherDaily{Summary: "This is a test daily summary"}}
 		// Act
 		got, err := ParseWeatherResponse(input)
 
@@ -186,7 +186,6 @@ func TestParseWeatherResponse(t *testing.T) {
 		assert.Error(err, "Expected an error from ParseWeatherResponse")
 	})
 }
-
 
 // This is just an example of a benchmark test. You can run it with:
 // go test -v --bench . --benchmem

@@ -2,11 +2,9 @@
 package main
 
 import (
-	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	logger "log"
 	"net/http"
 	"os"
@@ -17,7 +15,7 @@ const (
 	//replace with your personal information as desired
 	apiURLFmt = "https://api.forecast.io/forecast/%s/%s,%s"
 	key       = "32772f4b37c5a08eb4488a2ce79155bd"
-	latitude  = "42.2797" // Ann Arbor Latitude
+	latitude  = "42.2797"  // Ann Arbor Latitude
 	longitude = "-83.7369" // Ann Arbor Longitude
 	layoutUS  = "January 2, 2006"
 )
@@ -57,45 +55,24 @@ func GetForecast(key, latitude, longitude string) (Forecast, error) {
 
 // GenerateURL will construct the JIRA API call from components
 func GenerateURL(key, latitude, longitude string) string {
-	return fmt.Sprintf(apiURLFmt, key, latitude, longitude)
+	return ""
 }
 
 // BuildRequest will build a new client and request with the proper
 // headers, including basic authentication
 func BuildRequest(url string) *http.Request {
-	req, _ := http.NewRequest(http.MethodGet, url, nil)
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Content-Type", "application/json")
-	return req
+	return nil
 }
 
 // GetBody will take an httpResponse and extract the body as a string
 func GetBody(res *http.Response) string {
-	defer checkedResponseBodyClose(res)
-	body, _ := ioutil.ReadAll(res.Body)
-	return string(body)
-}
-
-func checkedResponseBodyClose(response *http.Response) {
-	err := response.Body.Close()
-	if err != nil {
-		logger.Println(err)
-	}
+	return ""
 }
 
 // ParseJiraResponse will parse the Jira response into a JIRAResponse
 func ParseWeatherResponse(jsonData string) (Forecast, error) {
-	forecast := Forecast{}
-
-	jsonErr := json.Unmarshal([]byte(jsonData), &forecast)
-	if jsonErr != nil {
-		logger.Println(jsonErr)
-		return Forecast{}, jsonErr
-	}
-
-	return forecast, nil
+	return Forecast{}, nil
 }
-
 
 func Output(fc Forecast, forecast bool, log *logger.Logger) {
 	cur := fc.Currently
@@ -135,28 +112,27 @@ func Output(fc Forecast, forecast bool, log *logger.Logger) {
 
 type Forecast struct {
 	Currently CurrentConditions `json:"currently"`
-	Daily WeatherDaily `json:"daily"`
+	Daily     WeatherDaily      `json:"daily"`
 }
 
 type CurrentConditions struct {
-Time        int64
-Summary     string
-Temperature float32
-Humidity    float32
-WindSpeed   float32
-WindBearing float32
+	Time        int64
+	Summary     string
+	Temperature float32
+	Humidity    float32
+	WindSpeed   float32
+	WindBearing float32
 }
 
 type WeatherDaily struct {
-Summary string
-Data    []struct {
-Time           int64
-Summary        string
-TemperatureMin float32
-TemperatureMax float32
-Humidity       float32
-WindSpeed      float32
-WindBearing    float32
-} `json:"data"`
+	Summary string
+	Data    []struct {
+		Time           int64
+		Summary        string
+		TemperatureMin float32
+		TemperatureMax float32
+		Humidity       float32
+		WindSpeed      float32
+		WindBearing    float32
+	} `json:"data"`
 }
-

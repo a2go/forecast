@@ -26,7 +26,7 @@ func main() {
 	log := logger.New(os.Stderr, "", 0)
 	forecast := getFlag()
 	fc, _ := GetForecast(key, latitude, longitude)
-	Output(fc, forecast, log)
+	output(fc, forecast, log)
 }
 
 func getFlag() bool {
@@ -41,8 +41,8 @@ func help() {
 	flag.PrintDefaults()
 }
 
-// This is a "glue" function.  It takes all of the more testable, behavioral
-// functions and "glues" them together without any other inherent behavior
+// GetForecast - This is a "glue" function.  It takes all of the more testable,
+//  behavioral functions and "glues" them together without any other inherent behavior
 func GetForecast(key, latitude, longitude string) (Forecast, error) {
 	url := GenerateURL(key, latitude, longitude)
 	weatherClient := http.Client{}
@@ -55,7 +55,7 @@ func GetForecast(key, latitude, longitude string) (Forecast, error) {
 	return ParseWeatherResponse(body)
 }
 
-// GenerateURL will construct the JIRA API call from components
+// GenerateURL will construct the DarkSky API url from components
 func GenerateURL(key, latitude, longitude string) string {
 	return fmt.Sprintf(apiURLFmt, key, latitude, longitude)
 }
@@ -83,7 +83,7 @@ func checkedResponseBodyClose(response *http.Response) {
 	}
 }
 
-// ParseJiraResponse will parse the Jira response into a JIRAResponse
+// ParseWeatherResponse will parse the DarkSky service response into a Forecast
 func ParseWeatherResponse(jsonData string) (Forecast, error) {
 	forecast := Forecast{}
 
@@ -96,7 +96,7 @@ func ParseWeatherResponse(jsonData string) (Forecast, error) {
 	return forecast, nil
 }
 
-func Output(fc Forecast, forecast bool, log *logger.Logger) {
+func output(fc Forecast, forecast bool, log *logger.Logger) {
 	cur := fc.Currently
 	daily := fc.Daily
 	if !forecast {
@@ -132,11 +132,13 @@ func Output(fc Forecast, forecast bool, log *logger.Logger) {
 	}
 }
 
+// Forecast is just the parts of the response we care about. Current and Daily
 type Forecast struct {
-	Currently CurrentConditions `json:"currently"`
-	Daily     WeatherDaily      `json:"daily"`
+	Currently CurrentConditions
+	Daily     WeatherDaily
 }
 
+// CurrentConditions represents the current weather observed weather conditions
 type CurrentConditions struct {
 	Time        int64
 	Summary     string
@@ -146,6 +148,7 @@ type CurrentConditions struct {
 	WindBearing float32
 }
 
+// WeatherDaily represents the daily forecast for the next several days
 type WeatherDaily struct {
 	Summary string
 	Data    []struct {
@@ -156,5 +159,5 @@ type WeatherDaily struct {
 		Humidity       float32
 		WindSpeed      float32
 		WindBearing    float32
-	} `json:"data"`
+	}
 }

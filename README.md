@@ -27,6 +27,7 @@ What else can you do to make this tool more useful?  Some ideas:
 - Allow searching by keyword
 - Use the existing benchmark and find the fastest string concatenation method
 - Write more integration tests (but keep them separate from unit tests)
+- Install golint `go get -v -u golang.org/x/lint/golint`, run `golint` and fix all errors
 
 If you complete any of the stretch goals, be sure to add tests!!!
 
@@ -54,6 +55,30 @@ If the test suite contains benchmarks, you can run these with the `--bench` and 
 go test -v --bench . --benchmem
 ```
 Keep in mind that each reviewer will run benchmarks on a different machine, with different specs, so the results from these benchmark tests may vary.
+
+##### What Else Could be Better?
+
+- make sure to always run `go fmt`. 
+- run golint and fix those issues
+- you should always check errors, but in the interest of time, this doesn't require you to
+- assertion helpers aren't needed the majority of the time and your code will look more uniform with the community if using the testing package directly
+- a lot of the top level functions like GetBody don't really make sense in a "forecast" package. you should make an HTTP Client type with methods to get a forecast and such. i would take a look at https://godoc.org/github.com/google/go-github/github#Client as an example of a well-done large HTTP client
+- the integration test is probably best done as a shell script in CI or similar. in general you want your package main to be as small as possible and to just wire up dependencies, so you don't need a lot of integration tests like this
+- loggers should always be passed as a dependency so that a random library function doesn't start outputting logs in a binary
+
+One way to do this last thing is make the functions take a *log.Logger, or make the functions be Methods on a struct that contains a Logger pointer:
+
+```
+type logger interface {
+        Printf(string, ...interface{})
+}
+
+type T struct {
+        logger
+        // other fields
+}
+```
+Now, the consumer of  type T supplies a value of type log.Logger when constructing new T‘s, and the methods on T use the logger they were provided when they want to log.
 
 ##### Create your own API token
 In order to use the Dark Sky API, you first need your own API key. Getting an API key is quick and free. 

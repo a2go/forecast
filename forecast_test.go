@@ -12,7 +12,7 @@ import (
 // Welcome to the October 2019 A2GO Workshop!
 //
 // We will be building a CLI tool to fetch current and forecasted weather and print
-// to Standard Output (the screen).  You might notice in forecast.go that we have the
+// to Standard output (the screen).  You might notice in forecast.go that we have the
 // shell of a file.  We've implemented the basics for running the code.  Only problem:
 // none of the actual behavior has been developed yet.
 //

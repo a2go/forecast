@@ -15,7 +15,7 @@ func TestBadArgs(t *testing.T) {
 	out, err := cmd.CombinedOutput()
 	sout := string(out) // because out is []byte
 	if err != nil && !strings.Contains(sout, "Usage: forecast [flags]") {
-		fmt.Println(sout) // so we can see the full Output
+		fmt.Println(sout) // so we can see the full output
 		t.Errorf("%v", err)
 	}
 }

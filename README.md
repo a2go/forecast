@@ -22,9 +22,8 @@ We've structured the hints to help you along the way. The last hint in a functio
 ### Stretch goals:
 What else can you do to make this tool more useful?  Some ideas:
 - Better error handling and reporting
-- Use environment variables or CLI input for some hard-coded values (username, password, etc)
-- Display more information to the user
-- Allow searching by keyword
+- Use environment variables or CLI input for some hard-coded values (token, latitude, longitude, etc)
+- Display more information to the user (emoji?)
 - Use the existing benchmark and find the fastest string concatenation method
 - Write more integration tests (but keep them separate from unit tests)
 - Install golint `go get -v -u golang.org/x/lint/golint`, run `golint` and fix all errors

@@ -66,7 +66,7 @@ func TestGenerateURL(t *testing.T) {
 
 func TestBuildRequest(t *testing.T) {
 	assert := assertions.New(t)
-	t.Run("Build Request from url jira UserId and Jira Password", func(t *testing.T) {
+	t.Run("Build Request from url", func(t *testing.T) {
 		//t.Skip("Delete this when ready to go next")
 
 		// Docs -- https://golang.org/pkg/net/http
@@ -126,7 +126,7 @@ func TestGetBody(t *testing.T) {
 	})
 }
 
-func TestParseJiraResponse(t *testing.T) {
+func TestParseWeatherResponse(t *testing.T) {
 	assert := assertions.New(t)
 
 	t.Run("empty response returns empty result", func(t *testing.T) {
@@ -142,7 +142,7 @@ func TestParseJiraResponse(t *testing.T) {
 		got, err := ParseWeatherResponse(input)
 
 		// Assert
-		assert.NoError(err, "Expected no error from getJiraResponse")
+		assert.NoError(err, "Expected no error from ParseWeatherResponse")
 		assert.Equal(got, want, "Response did not match what we expected")
 	})
 
@@ -167,7 +167,7 @@ func TestParseJiraResponse(t *testing.T) {
 		got, err := ParseWeatherResponse(input)
 
 		// Assert
-		assert.NoError(err, "Expected no error from getJiraResponse")
+		assert.NoError(err, "Expected no error from ParseWeatherResponse")
 		assert.Equal(got, want, "Response did not match what we expected")
 	})
 
@@ -183,10 +183,14 @@ func TestParseJiraResponse(t *testing.T) {
 		_, err := ParseWeatherResponse(input)
 
 		// Assert
-		assert.Error(err, "Expected an error from getJiraResponse")
+		assert.Error(err, "Expected an error from ParseWeatherResponse")
 	})
 }
 
+
+// This is just an example of a benchmark test. You can run it with:
+// go test -v --bench . --benchmem
+// as a stretch goal you can use benchmark tests to see where to focus make things faster!
 func BenchmarkGenerateURL(b *testing.B) {
 	var (
 		str, longStr string = "my_string", `qwertyuiopqwertyuiopqwertyuio

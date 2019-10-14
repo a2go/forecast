@@ -37,15 +37,7 @@ go tool cover -html=coverage.out
 go tool cover -func=coverage.out
 ```
 
-##### Test Benchmarks
-If the test suite contains benchmarks, you can run these with the `--bench` and `--benchmem` flags:
-
-```
-go test -v --bench . --benchmem
-```
-Keep in mind that each reviewer will run benchmarks on a different machine, with different specs, so the results from these benchmark tests may vary.
-
-##### Seperating Integration Tests]
+##### Separating Integration Tests
 You can build the executable and run a simple integration test if you do:
 ```shell script
 go build
@@ -54,6 +46,14 @@ PATH=.:$PATH go test -tags=integration
 It is important to keep slow and possibly destructive integration tests separated from unit tests. 
  
 The tag used in the build comment cannot have a dash, although underscores are allowed. For example, `// +build unit-tests` will not work, whereas `// +build unit_tests` will.
+
+##### Test Benchmarks
+If the test suite contains benchmarks, you can run these with the `--bench` and `--benchmem` flags:
+
+```
+go test -v --bench . --benchmem
+```
+Keep in mind that each reviewer will run benchmarks on a different machine, with different specs, so the results from these benchmark tests may vary.
 
 ##### Create your own API token
 In order to use the Dark Sky API, you first need your own API key. Getting an API key is quick and free. 

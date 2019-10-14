@@ -17,7 +17,7 @@ const (
 	//replace with your personal information as desired
 	apiURLFmt = "https://api.forecast.io/forecast/%s/%s,%s"
 	key       = "32772f4b37c5a08eb4488a2ce79155bd"
-	latitude  = "42.2797" // Ann Arbor Latitude
+	latitude  = "42.2797"  // Ann Arbor Latitude
 	longitude = "-83.7369" // Ann Arbor Longitude
 	layoutUS  = "January 2, 2006"
 )
@@ -96,7 +96,6 @@ func ParseWeatherResponse(jsonData string) (Forecast, error) {
 	return forecast, nil
 }
 
-
 func Output(fc Forecast, forecast bool, log *logger.Logger) {
 	cur := fc.Currently
 	daily := fc.Daily
@@ -135,28 +134,27 @@ func Output(fc Forecast, forecast bool, log *logger.Logger) {
 
 type Forecast struct {
 	Currently CurrentConditions `json:"currently"`
-	Daily WeatherDaily `json:"daily"`
+	Daily     WeatherDaily      `json:"daily"`
 }
 
 type CurrentConditions struct {
-Time        int64
-Summary     string
-Temperature float32
-Humidity    float32
-WindSpeed   float32
-WindBearing float32
+	Time        int64
+	Summary     string
+	Temperature float32
+	Humidity    float32
+	WindSpeed   float32
+	WindBearing float32
 }
 
 type WeatherDaily struct {
-Summary string
-Data    []struct {
-Time           int64
-Summary        string
-TemperatureMin float32
-TemperatureMax float32
-Humidity       float32
-WindSpeed      float32
-WindBearing    float32
-} `json:"data"`
+	Summary string
+	Data    []struct {
+		Time           int64
+		Summary        string
+		TemperatureMin float32
+		TemperatureMax float32
+		Humidity       float32
+		WindSpeed      float32
+		WindBearing    float32
+	} `json:"data"`
 }
-

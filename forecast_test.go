@@ -162,7 +162,7 @@ func TestParseWeatherResponse(t *testing.T) {
 				"summary": "This is a test daily summary"
 			}
 		}`
-		want := Forecast{Currently: CurrentConditions{Summary: "This is a test current summary",}, Daily: WeatherDaily{Summary: "This is a test daily summary"},}
+		want := Forecast{Currently: CurrentConditions{Summary: "This is a test current summary"}, Daily: WeatherDaily{Summary: "This is a test daily summary"}}
 		// Act
 		got, err := ParseWeatherResponse(input)
 
@@ -186,7 +186,6 @@ func TestParseWeatherResponse(t *testing.T) {
 		assert.Error(err, "Expected an error from ParseWeatherResponse")
 	})
 }
-
 
 // This is just an example of a benchmark test. You can run it with:
 // go test -v --bench . --benchmem

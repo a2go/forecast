@@ -19,5 +19,3 @@ func TestBadArgs(t *testing.T) {
 		t.Errorf("%v", err)
 	}
 }
-
-

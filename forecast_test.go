@@ -47,7 +47,7 @@ func TestGenerateURL(t *testing.T) {
 	assert := assertions.New(t)
 	t.Run("URL concatenated from base + apipath + ticket", func(t *testing.T) {
 		// Hint #1 -- https://gist.github.com/BrianGenisio/59e493e7f791ddba6d5f353d1d5e1051
-		// Hint #2 -- https://gist.github.com/StevenACoffman/fc29c4368ca74f4d7c4077539406fdf2
+		// Hint #2 -- https://gist.github.com/dbraley/1429aecbab3a9f7ae4a8399dc3e7eaea
 
 		// Arrange
 		key := "not.important"
@@ -67,7 +67,7 @@ func TestGenerateURL(t *testing.T) {
 func TestBuildRequest(t *testing.T) {
 	assert := assertions.New(t)
 	t.Run("Build Request from url", func(t *testing.T) {
-		//t.Skip("Delete this when ready to go next")
+		t.Skip("Delete this when ready to go next")
 
 		// Docs -- https://golang.org/pkg/net/http
 		// Hint #1 -- https://gist.github.com/BrianGenisio/a3ee7551c2b6bf0ca89ff3cd09b3c5c5
@@ -79,6 +79,7 @@ func TestBuildRequest(t *testing.T) {
 
 		wantURL := url
 		wantJSONMIMEType := "application/json"
+		wantMethod := http.MethodGet
 
 		// Act
 		got := BuildRequest(url)
@@ -86,13 +87,15 @@ func TestBuildRequest(t *testing.T) {
 		if assert.NotNil(got, "Expected to get a request back, got nil") {
 
 			gotURL := got.URL.String()
+			gotMethod := got.Method
 			gotAccept := got.Header.Get("Accept")
 			gotContentType := got.Header.Get("Content-Type")
 
 			// Assert
 			assert.Equal(wantURL, gotURL)
-			assert.Equal(wantJSONMIMEType, gotContentType)
-			assert.Equal(wantJSONMIMEType, gotAccept)
+			assert.Equal(wantMethod, gotMethod)
+			assert.Equal(wantJSONMIMEType, gotContentType, "Expected `Content-Type` Header to be application/json")
+			assert.Equal(wantJSONMIMEType, gotAccept, "Expected `Accept` Header to be application/json")
 		}
 	})
 }
@@ -100,7 +103,7 @@ func TestBuildRequest(t *testing.T) {
 func TestGetBody(t *testing.T) {
 	assert := assertions.New(t)
 	t.Run("Test Get Body from Response", func(t *testing.T) {
-		//t.Skip("Delete this when ready to go next")
+		t.Skip("Delete this when ready to go next")
 
 		// Docs -- https://golang.org/pkg/io
 		// Hint #1 -- https://gist.github.com/BrianGenisio/cf696a9e29883a5089f8ddd725e20651
@@ -129,7 +132,7 @@ func TestParseWeatherResponse(t *testing.T) {
 	assert := assertions.New(t)
 
 	t.Run("empty response returns empty result", func(t *testing.T) {
-		//t.Skip("Delete this when ready to go next")
+		t.Skip("Delete this when ready to go next")
 
 		// Hint #1 -- https://gist.github.com/StevenACoffman/f688e1d6b20b218443ffbdce6ec773be
 

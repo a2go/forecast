@@ -67,7 +67,7 @@ func TestGenerateURL(t *testing.T) {
 func TestBuildRequest(t *testing.T) {
 	assert := assertions.New(t)
 	t.Run("Build Request from url", func(t *testing.T) {
-		//t.Skip("Delete this when ready to go next")
+		t.Skip("Delete this when ready to go next")
 
 		// Docs -- https://golang.org/pkg/net/http
 		// Hint #1 -- https://gist.github.com/BrianGenisio/a3ee7551c2b6bf0ca89ff3cd09b3c5c5
@@ -100,7 +100,7 @@ func TestBuildRequest(t *testing.T) {
 func TestGetBody(t *testing.T) {
 	assert := assertions.New(t)
 	t.Run("Test Get Body from Response", func(t *testing.T) {
-		//t.Skip("Delete this when ready to go next")
+		t.Skip("Delete this when ready to go next")
 
 		// Docs -- https://golang.org/pkg/io
 		// Hint #1 -- https://gist.github.com/BrianGenisio/cf696a9e29883a5089f8ddd725e20651
@@ -129,7 +129,7 @@ func TestParseWeatherResponse(t *testing.T) {
 	assert := assertions.New(t)
 
 	t.Run("empty response returns empty result", func(t *testing.T) {
-		//t.Skip("Delete this when ready to go next")
+		t.Skip("Delete this when ready to go next")
 
 		// Hint #1 -- https://gist.github.com/StevenACoffman/f688e1d6b20b218443ffbdce6ec773be
 
@@ -146,7 +146,7 @@ func TestParseWeatherResponse(t *testing.T) {
 	})
 
 	t.Run("good response populates result", func(t *testing.T) {
-		//t.Skip("Delete this when ready to go next")
+		t.Skip("Delete this when ready to go next")
 
 		// Docs -- https://golang.org/pkg/encoding/json
 		// Hint #2 -- https://gist.github.com/StevenACoffman/d93ccb05b9a3016ff242f1622edc93ad

@@ -2,11 +2,13 @@ package main
 
 import (
 	"bytes"
-	assertions "github.com/stretchr/testify/assert"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
 	"testing"
+
+	assertions "github.com/stretchr/testify/assert"
 )
 
 // Welcome to the October 2019 A2GO Workshop!
@@ -42,6 +44,9 @@ import (
 // - Write more integration tests (but keep them separate from unit tests)
 //
 // If you complete any of the stretch goals, be sure to add tests!!!
+func init() {
+	progress = Level{Current: 1}
+}
 
 func TestGenerateURL(t *testing.T) {
 	assert := assertions.New(t)
@@ -60,14 +65,20 @@ func TestGenerateURL(t *testing.T) {
 		got := GenerateURL(key, lat, long)
 
 		// Assert
-		assert.Equal(want, got, "Expected URL to be concatenated")
+		if assert.Equal(want, got, "Expected URL to be concatenated") {
+			progress.SetMessage()
+			fmt.Printf(progress.Msg, progress.MsgValues...)
+			progress.Current++
+		}
 	})
 }
 
 func TestBuildRequest(t *testing.T) {
 	assert := assertions.New(t)
 	t.Run("Build Request from url", func(t *testing.T) {
-		t.Skip("Delete this when ready to go next")
+		if progress.Current < 2 {
+			t.Skip("Insufficient progress")
+		}
 
 		// Docs -- https://golang.org/pkg/net/http
 		// Hint #1 -- https://gist.github.com/BrianGenisio/a3ee7551c2b6bf0ca89ff3cd09b3c5c5
@@ -92,10 +103,15 @@ func TestBuildRequest(t *testing.T) {
 			gotContentType := got.Header.Get("Content-Type")
 
 			// Assert
-			assert.Equal(wantURL, gotURL)
-			assert.Equal(wantMethod, gotMethod)
-			assert.Equal(wantJSONMIMEType, gotContentType, "Expected `Content-Type` Header to be application/json")
-			assert.Equal(wantJSONMIMEType, gotAccept, "Expected `Accept` Header to be application/json")
+			if assert.Equal(wantURL, gotURL) &&
+				assert.Equal(wantMethod, gotMethod) &&
+				assert.Equal(wantJSONMIMEType, gotContentType, "Expected `Content-Type` Header to be application/json") &&
+				assert.Equal(wantJSONMIMEType, gotAccept, "Expected `Accept` Header to be application/json") {
+
+				progress.SetMessage()
+				fmt.Printf(progress.Msg, progress.MsgValues...)
+				progress.Current++
+			}
 		}
 	})
 }
@@ -103,7 +119,9 @@ func TestBuildRequest(t *testing.T) {
 func TestGetBody(t *testing.T) {
 	assert := assertions.New(t)
 	t.Run("Test Get Body from Response", func(t *testing.T) {
-		t.Skip("Delete this when ready to go next")
+		if progress.Current < 3 {
+			t.Skip("Insufficient progress")
+		}
 
 		// Docs -- https://golang.org/pkg/io
 		// Hint #1 -- https://gist.github.com/BrianGenisio/cf696a9e29883a5089f8ddd725e20651
@@ -124,7 +142,11 @@ func TestGetBody(t *testing.T) {
 		want := "OK"
 
 		// Assert
-		assert.Equal(want, got)
+		if assert.Equal(want, got) {
+			progress.SetMessage()
+			fmt.Printf(progress.Msg, progress.MsgValues...)
+			progress.Current++
+		}
 	})
 }
 
@@ -132,7 +154,9 @@ func TestParseWeatherResponse(t *testing.T) {
 	assert := assertions.New(t)
 
 	t.Run("empty response returns empty result", func(t *testing.T) {
-		t.Skip("Delete this when ready to go next")
+		if progress.Current < 4 {
+			t.Skip("Insufficient progress")
+		}
 
 		// Hint #1 -- https://gist.github.com/StevenACoffman/f688e1d6b20b218443ffbdce6ec773be
 
@@ -144,12 +168,19 @@ func TestParseWeatherResponse(t *testing.T) {
 		got, err := ParseWeatherResponse(input)
 
 		// Assert
-		assert.NoError(err, "Expected no error from ParseWeatherResponse")
-		assert.Equal(got, want, "Response did not match what we expected")
+		if assert.NoError(err, "Expected no error from ParseWeatherResponse") &&
+			assert.Equal(got, want, "Response did not match what we expected") {
+
+			progress.SetMessage()
+			fmt.Printf(progress.Msg, progress.MsgValues...)
+			progress.Current++
+		}
 	})
 
 	t.Run("good response populates result", func(t *testing.T) {
-		t.Skip("Delete this when ready to go next")
+		if progress.Current < 5 {
+			t.Skip("Insufficient progress")
+		}
 
 		// Docs -- https://golang.org/pkg/encoding/json
 		// Hint #2 -- https://gist.github.com/StevenACoffman/d93ccb05b9a3016ff242f1622edc93ad
@@ -169,12 +200,19 @@ func TestParseWeatherResponse(t *testing.T) {
 		got, err := ParseWeatherResponse(input)
 
 		// Assert
-		assert.NoError(err, "Expected no error from ParseWeatherResponse")
-		assert.Equal(got, want, "Response did not match what we expected")
+		if assert.NoError(err, "Expected no error from ParseWeatherResponse") &&
+			assert.Equal(got, want, "Response did not match what we expected") {
+
+			progress.SetMessage()
+			fmt.Printf(progress.Msg, progress.MsgValues...)
+			progress.Current++
+		}
 	})
 
 	t.Run("bad response returns an error", func(t *testing.T) {
-		t.Skip("Delete this when ready to go next")
+		if progress.Current < 6 {
+			t.Skip("Insufficient progress")
+		}
 
 		// Hint #4 -- https://gist.github.com/StevenACoffman/d49defdf4147fbf9fdc9c8fcdc09f528
 
@@ -185,7 +223,11 @@ func TestParseWeatherResponse(t *testing.T) {
 		_, err := ParseWeatherResponse(input)
 
 		// Assert
-		assert.Error(err, "Expected an error from ParseWeatherResponse")
+		if assert.Error(err, "Expected an error from ParseWeatherResponse") {
+			progress.SetMessage()
+			fmt.Printf(progress.Msg, progress.MsgValues...)
+			progress.Current++
+		}
 	})
 }
 

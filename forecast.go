@@ -11,6 +11,8 @@ import (
 	"time"
 )
 
+var progress Level
+
 const (
 	//replace with your personal information as desired
 	key       = "32772f4b37c5a08eb4488a2ce79155bd"
@@ -112,6 +114,17 @@ func output(fc Forecast, forecast bool, log *logger.Logger) {
 	}
 }
 
+// SetMessage sets a formatted string depending on test case progress.
+func (l *Level) SetMessage() {
+	l.Msg = "You passed level %v!"
+	l.MsgValues = []interface{}{l.Current}
+	for i := 0; i < l.Current; i++ {
+		l.Msg += " %c"
+		l.MsgValues = append(l.MsgValues, 128640)
+	}
+	l.Msg += "\n"
+}
+
 // Forecast is just the parts of the response we care about. Current and Daily
 type Forecast struct {
 	Currently CurrentConditions
@@ -140,4 +153,11 @@ type WeatherDaily struct {
 		WindSpeed      float32
 		WindBearing    float32
 	}
+}
+
+// Level tracks the progress of tests being passed.
+type Level struct {
+	Current   int
+	Msg       string
+	MsgValues []interface{}
 }
